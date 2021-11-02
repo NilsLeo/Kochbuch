@@ -8,7 +8,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class KochbuchController {
 
     @GetMapping(path = "/")
-    public ModelAndView showKochbuchPage(){
+    public ModelAndView showKochbuchPage() {
         return new ModelAndView("Kochbuch");
     }
 

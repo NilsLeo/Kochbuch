@@ -7,13 +7,13 @@ public class Person {
     private boolean vaccinated;
 
 
-
     public Person(long id, String firstName, String lastName, boolean vaccinated) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.vaccinated = vaccinated;
     }
+
     public long getId() {
         return id;
     }

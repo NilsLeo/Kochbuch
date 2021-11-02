@@ -12,7 +12,7 @@ import java.util.List;
 public class PersonRestController {
     private List<Person> persons;
 
-    public PersonRestController(){
+    public PersonRestController() {
         persons = new ArrayList<>();
         persons.add(new Person(1, "Max", "Mustermann", false));
         persons.add(new Person(2, "Maxima", "Meier", true));
