@@ -38,7 +38,7 @@ public class Person {
         this.lastName = lastName;
     }
 
-    public boolean isVaccinated() {
+    public boolean getVaccinated() {
         return vaccinated;
     }
 

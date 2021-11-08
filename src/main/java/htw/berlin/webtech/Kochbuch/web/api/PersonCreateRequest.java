@@ -1,35 +1,16 @@
-package htw.berlin.webtech.Kochbuch.persistence;
+package htw.berlin.webtech.Kochbuch.web.api;
 
-
-import javax.persistence.*;
-
-@Entity(name = "persons")
-public class PersonEntity {
-    //@Column ist optional:damit kann man Name und restrictions usw des sql columns festlegen
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-
-    @Column(nullable = false)
+public class PersonCreateRequest {
     private String firstName;
-
-    @Column(nullable = false)
     private String lastName;
-
     private boolean vaccinated;
 
-    public PersonEntity(String firstName, String lastName, boolean vaccinated) {
+
+    public PersonCreateRequest(long id, String firstName, String lastName, boolean vaccinated) {
+
         this.firstName = firstName;
         this.lastName = lastName;
         this.vaccinated = vaccinated;
-    }
-
-    protected PersonEntity() {
-
-    }
-
-    public long getId() {
-        return id;
     }
 
     public String getFirstName() {
@@ -48,7 +29,7 @@ public class PersonEntity {
         this.lastName = lastName;
     }
 
-    public boolean getVaccinated() {
+    public boolean isVaccinated() {
         return vaccinated;
     }
 
