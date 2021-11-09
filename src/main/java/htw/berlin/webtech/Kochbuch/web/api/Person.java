@@ -6,7 +6,6 @@ public class Person {
     private String lastName;
     private boolean vaccinated;
 
-
     public Person(long id, String firstName, String lastName, boolean vaccinated) {
         this.id = id;
         this.firstName = firstName;
@@ -38,7 +37,7 @@ public class Person {
         this.lastName = lastName;
     }
 
-    public boolean getVaccinated() {
+    public boolean isVaccinated() {
         return vaccinated;
     }
 
