@@ -6,9 +6,18 @@ public class Recipe {
     private long id;
     private String recipeName;
 
-    public Recipe(long id, String recipeName) {
+    private String description;
+
+    private int duration;
+
+    private List<Ingredient> Ingredients;
+
+    public Recipe(long id, String recipeName, String description, int duration, List<Ingredient> Ingredients) {
         this.id = id;
         this.recipeName = recipeName;
+        this.description = description;
+        this.duration = duration;
+        this.Ingredients = Ingredients;
 
     }
 
