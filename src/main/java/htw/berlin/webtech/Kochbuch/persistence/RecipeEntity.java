@@ -6,7 +6,7 @@ import htw.berlin.webtech.Kochbuch.web.api.Ingredient;
 import javax.persistence.*;
 import java.util.List;
 
-@Entity(name = "Recipes")
+@Entity(name = "recipes")
 public class RecipeEntity {
     //@Column ist optional:damit kann man Name und restrictions usw des sql columns festlegen
     @Id
@@ -16,10 +16,11 @@ public class RecipeEntity {
     @Column(nullable = false)
     private String recipeName;
 
+    @Column(nullable = false)
     private String description;
 
     private int duration;
-
+    @ElementCollection
     private List<Ingredient> Ingredients;
 
     public RecipeEntity(String recipeName) {

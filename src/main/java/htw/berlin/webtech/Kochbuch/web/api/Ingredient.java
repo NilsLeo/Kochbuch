@@ -1,8 +1,9 @@
 package htw.berlin.webtech.Kochbuch.web.api;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Ingredient {
+public class Ingredient implements Serializable {
     private long id;
     private String ingredientName;
     private int calories;

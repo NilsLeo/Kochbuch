@@ -30,7 +30,7 @@ public class RecipeService {
     }
 
     public Recipe create(RecipeManipulationRequest request) {
-        var RecipeEntity = new RecipeEntity(request.getrecipeName());
+        var RecipeEntity = new RecipeEntity(request.getRecipeName());
         RecipeEntity = RecipeRepository.save(RecipeEntity);
         return transformEntity(RecipeEntity);
     }
@@ -41,7 +41,10 @@ public class RecipeService {
             return null;
         }
         var RecipeEntity = RecipeEntityOptional.get();
-        RecipeEntity.setrecipeName(request.getrecipeName());
+        RecipeEntity.setRecipeName(request.getRecipeName());
+        RecipeEntity.setDescription(request.getDescription());
+        RecipeEntity.setDuration(request.getDuration());
+        RecipeEntity.setIngredients(request.getIngredients());
         RecipeEntity = RecipeRepository.save(RecipeEntity);
         return transformEntity(RecipeEntity);
     }
@@ -49,7 +52,10 @@ public class RecipeService {
     private Recipe transformEntity(RecipeEntity RecipeEntity) {
         return new Recipe(
                 RecipeEntity.getId(),
-                RecipeEntity.getrecipeName()
+                RecipeEntity.getRecipeName(),
+                RecipeEntity.getDescription(),
+                RecipeEntity.getDuration(),
+                RecipeEntity.getIngredients()
         );
     }
 
