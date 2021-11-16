@@ -1,5 +1,7 @@
 package htw.berlin.webtech.Kochbuch.web.api;
 
+import htw.berlin.webtech.Kochbuch.persistence.RecipeEntity;
+
 import java.util.List;
 
 public class Ingredient{
@@ -31,7 +33,7 @@ public class Ingredient{
         this.ingredientName = ingredientName;
     }
 
-    public long getCalories() {
+    public int getCalories() {
         return calories;
     }
 

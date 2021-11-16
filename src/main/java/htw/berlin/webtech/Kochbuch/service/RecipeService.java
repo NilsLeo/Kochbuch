@@ -30,7 +30,7 @@ public class RecipeService {
     }
 
     public Recipe create(RecipeManipulationRequest request) {
-        var RecipeEntity = new RecipeEntity(request.getRecipeName(), request.getDescription(), request.getDuration(), request.getIngredients());
+        var RecipeEntity = new RecipeEntity(request.getRecipeName(), request.getDescription(), request.getDuration(), request.getIngredientEntities());
         RecipeEntity = RecipeRepository.save(RecipeEntity);
         return transformEntity(RecipeEntity);
     }
@@ -44,7 +44,7 @@ public class RecipeService {
         RecipeEntity.setRecipeName(request.getRecipeName());
         RecipeEntity.setDescription(request.getDescription());
         RecipeEntity.setDuration(request.getDuration());
-        RecipeEntity.setIngredients(request.getIngredients());
+        RecipeEntity.setIngredientEntities(request.getIngredientEntities());
         RecipeEntity = RecipeRepository.save(RecipeEntity);
         return transformEntity(RecipeEntity);
     }
@@ -55,7 +55,7 @@ public class RecipeService {
                 RecipeEntity.getRecipeName(),
                 RecipeEntity.getDescription(),
                 RecipeEntity.getDuration(),
-                RecipeEntity.getIngredients()
+                RecipeEntity.getIngredientEntities()
         );
     }
 

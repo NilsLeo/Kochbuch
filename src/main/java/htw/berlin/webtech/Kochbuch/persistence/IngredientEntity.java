@@ -2,7 +2,7 @@ package htw.berlin.webtech.Kochbuch.persistence;
 
 import htw.berlin.webtech.Kochbuch.web.api.Ingredient;
 import htw.berlin.webtech.Kochbuch.web.api.Recipe;
-
+import htw.berlin.webtech.Kochbuch.persistence.RecipeEntity;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -10,6 +10,8 @@ import java.util.List;
 
 @Entity (name = "ingredients")
 public class IngredientEntity{
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long ingredient_id;
@@ -20,14 +22,14 @@ public class IngredientEntity{
     @Column(nullable = false)
     private int calories;
 
-    @ManyToMany(mappedBy ="ingredients")
-    private List<Recipe> recipes = new ArrayList<>();
+    @ManyToMany(mappedBy ="recipes")
+    private List<RecipeEntity> recipeEntities;
 
 
-    public IngredientEntity(String ingredientName, int calories, List <Recipe> recipes) {
+    public IngredientEntity(String ingredientName, int calories, List <RecipeEntity> recipeEntities) {
         this.ingredientName = ingredientName;
         this.calories = calories;
-        this.recipes = recipes;
+        this.recipeEntities = recipeEntities;
     }
 
 
@@ -60,10 +62,11 @@ public class IngredientEntity{
         this.calories = calories;
     }
 
-    public List<Recipe> getRecipes() {
-        return recipes;
+    public List<RecipeEntity> getRecipeEntities() {
+        return recipeEntities;
     }
-    public void setRecipes(List<Recipe> recipes) {
-        this.recipes = recipes;
+    public void setRecipes(List<RecipeEntity> recipeEntities) {
+        this.recipeEntities = recipeEntities;
     }
-}
+
+    }

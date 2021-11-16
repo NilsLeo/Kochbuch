@@ -2,6 +2,7 @@ package htw.berlin.webtech.Kochbuch.persistence;
 
 
 import htw.berlin.webtech.Kochbuch.web.api.Ingredient;
+import htw.berlin.webtech.Kochbuch.web.api.Recipe;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -22,21 +23,19 @@ public class RecipeEntity {
 
     @Column(nullable = false)
     private int duration;
-    /*
-    @ManyToMany(targetEntity=IngredientEntity.class, fetch=FetchType.EAGER)
-     */
-
-    @ManyToMany
+    @ManyToMany(targetEntity = IngredientEntity.class, fetch = FetchType.EAGER)
     @JoinTable(
             name = "ingredients_recipes",
             joinColumns = @JoinColumn(name = "recipe_id"),
             inverseJoinColumns = @JoinColumn(name = "ingredient_id"))
-    private List<Ingredient> ingredients = new ArrayList<>();
-    public RecipeEntity(String recipeName, String description, int duration, List <Ingredient> Ingredients) {
+
+    private List<IngredientEntity> ingredientEntities = new ArrayList<>();
+
+    public RecipeEntity(String recipeName, String description, int duration, List<IngredientEntity> IngredientEntities) {
         this.recipeName = recipeName;
         this.description = description;
         this.duration = duration;
-        this.ingredients = Ingredients;
+        this.ingredientEntities = ingredientEntities;
     }
 
     protected RecipeEntity() {
@@ -75,11 +74,23 @@ public class RecipeEntity {
         this.duration = duration;
     }
 
-    public List<Ingredient> getIngredients() {
-        return ingredients;
+    public List<IngredientEntity> getIngredientEntities() {
+        return ingredientEntities;
     }
 
-    public void setIngredients(List<Ingredient> ingredients) {
-        this.ingredients = ingredients;
+    public void setIngredientEntities(List<IngredientEntity> ingredientEntities) {
+        this.ingredientEntities = ingredientEntities;
+    }
+
+    public List<Recipe> convert() {
+        List<Recipe> recipes = new ArrayList<>();
+        List<RecipeEntity> r = List.of(new RecipeEntity("recipeName", "description", )
+        for (RecipeEntity recipeEntity: ) {
+            ProductManager manager = new ProductManager();
+            manager.setName(dev.getName());
+            manager.setAge(dev.getAge());
+            pros.add(manager);
+        }
+        return recipes;
     }
 }

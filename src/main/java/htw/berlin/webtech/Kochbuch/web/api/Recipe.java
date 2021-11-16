@@ -1,5 +1,7 @@
 package htw.berlin.webtech.Kochbuch.web.api;
 
+import htw.berlin.webtech.Kochbuch.persistence.IngredientEntity;
+
 import java.util.List;
 
 public class Recipe {
@@ -10,14 +12,14 @@ public class Recipe {
 
     private int duration;
 
-    private List<Ingredient> Ingredients;
+    private List<Ingredient> ingredients;
 
-    public Recipe(long id, String recipeName, String description, int duration, List<Ingredient> Ingredients) {
+    public Recipe(long id, String recipeName, String description, int duration, List<Ingredient> ingredients) {
         this.id = id;
         this.recipeName = recipeName;
         this.description = description;
         this.duration = duration;
-        this.Ingredients = Ingredients;
+        this.ingredients = ingredients;
 
     }
 
@@ -29,11 +31,35 @@ public class Recipe {
         this.id = id;
     }
 
-    public String getrecipeName() {
+    public String getRecipeName() {
         return recipeName;
     }
 
-    public void setrecipeName(String recipeName) {
+    public void setRecipeName(String recipeName) {
         this.recipeName = recipeName;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public int getDuration() {
+        return duration;
+    }
+
+    public void setDuration(int duration) {
+        this.duration = duration;
+    }
+
+    public List<Ingredient> getIngredients() {
+        return ingredients;
+    }
+
+    public void setIngredients(List<Ingredient> ingredients) {
+        this.ingredients = ingredients;
     }
 }
