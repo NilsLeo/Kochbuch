@@ -4,9 +4,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-
 @Repository
-public interface RecipeRepository extends JpaRepository<RecipeEntity, Long> {
+public interface IngredientRepository extends JpaRepository<IngredientEntity, Long> {
 
-    List<RecipeEntity> findAllByRecipeName(String recipeName);
+    List<RecipeEntity> findAllByIngredientName(String ingredientName);
 }

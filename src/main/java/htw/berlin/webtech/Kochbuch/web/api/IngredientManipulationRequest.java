@@ -2,25 +2,13 @@ package htw.berlin.webtech.Kochbuch.web.api;
 
 import java.util.List;
 
-public class Ingredient{
-    private long ingredient_id;
+public class IngredientManipulationRequest {
     private String ingredientName;
     private int calories;
     private List <Recipe> recipes;
 
-    public Ingredient(long ingredient_id, String ingredientName, int calories, List<Recipe> recipes) {
-        this.ingredient_id = ingredient_id;
-        this.ingredientName = ingredientName;
-        this.calories = calories;
-        this.recipes = recipes;
-    }
-
-    public long getIngredient_id() {
-        return ingredient_id;
-    }
-
-    public void setIngredient_id(long ingredient_id) {
-        this.ingredient_id = ingredient_id;
+    public IngredientManipulationRequest(String IngredientName) {
+        this.ingredientName = IngredientName;
     }
 
     public String getIngredientName() {
@@ -31,7 +19,8 @@ public class Ingredient{
         this.ingredientName = ingredientName;
     }
 
-    public long getCalories() {
+
+    public int getCalories() {
         return calories;
     }
 

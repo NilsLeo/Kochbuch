@@ -1,5 +1,6 @@
 package htw.berlin.webtech.Kochbuch.web.api;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class RecipeManipulationRequest {
