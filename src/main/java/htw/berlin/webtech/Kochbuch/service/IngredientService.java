@@ -54,7 +54,6 @@ public class IngredientService {
                 IngredientEntity.getIngredient_id(),
                 IngredientEntity.getIngredientName(),
                 IngredientEntity.getCalories(),
-                IngredientEntity.getRecipeEntities()
         );
     }
 

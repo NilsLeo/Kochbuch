@@ -82,15 +82,13 @@ public class RecipeEntity {
         this.ingredientEntities = ingredientEntities;
     }
 
-    public List<Recipe> convert() {
-        List<Recipe> recipes = new ArrayList<>();
-        List<RecipeEntity> r = List.of(new RecipeEntity("recipeName", "description", )
-        for (RecipeEntity recipeEntity: ) {
-            ProductManager manager = new ProductManager();
-            manager.setName(dev.getName());
-            manager.setAge(dev.getAge());
-            pros.add(manager);
+    // https://stackoverflow.com/questions/40035102/how-to-convert-a-list-with-properties-to-a-another-list-the-java-8-way
+    public List<Ingredient> convertIngredientEntityListToIngredientList(List<IngredientEntity> ingredientEntities) {
+        List <Ingredient> ingredients = new ArrayList<>();
+        for (IngredientEntity ie: ingredientEntities){
+            Ingredient i = new Ingredient(ie.getIngredient_id(), ie.getIngredientName(), ie.getCalories(), List.of();
+            ingredients.add(i);
         }
-        return recipes;
+        return ingredients;
     }
 }

@@ -2,6 +2,7 @@ package htw.berlin.webtech.Kochbuch.service;
 
 import htw.berlin.webtech.Kochbuch.persistence.RecipeEntity;
 import htw.berlin.webtech.Kochbuch.persistence.RecipeRepository;
+import htw.berlin.webtech.Kochbuch.web.api.Ingredient;
 import htw.berlin.webtech.Kochbuch.web.api.Recipe;
 import htw.berlin.webtech.Kochbuch.web.api.RecipeManipulationRequest;
 import org.springframework.stereotype.Service;
@@ -55,7 +56,7 @@ public class RecipeService {
                 RecipeEntity.getRecipeName(),
                 RecipeEntity.getDescription(),
                 RecipeEntity.getDuration(),
-                RecipeEntity.getIngredientEntities()
+                RecipeEntity.convertIngredientEntityListToIngredientList(RecipeEntity.getIngredientEntities())
         );
     }
 
