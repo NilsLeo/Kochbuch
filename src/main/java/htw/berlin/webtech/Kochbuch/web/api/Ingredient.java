@@ -1,20 +1,21 @@
 package htw.berlin.webtech.Kochbuch.web.api;
 
-import htw.berlin.webtech.Kochbuch.persistence.RecipeEntity;
+import htw.berlin.webtech.Kochbuch.persistence.IngredientQuantity;
 
 import java.util.List;
+import java.util.Set;
 
-public class Ingredient{
+public class Ingredient {
     private long ingredient_id;
     private String ingredientName;
     private int calories;
-    private List <Recipe> recipes;
+    Set<IngredientQuantity> ingredientquantities;
 
-    public Ingredient(long ingredient_id, String ingredientName, int calories, List<Recipe> recipes) {
+    public Ingredient(long ingredient_id, String ingredientName, int calories, Set<IngredientQuantity> ingredientquantities) {
         this.ingredient_id = ingredient_id;
         this.ingredientName = ingredientName;
         this.calories = calories;
-        this.recipes = recipes;
+        this.ingredientquantities = ingredientquantities;
     }
 
     public long getIngredient_id() {
@@ -41,11 +42,11 @@ public class Ingredient{
         this.calories = calories;
     }
 
-    public List<Recipe> getRecipes() {
-        return recipes;
+    public Set<IngredientQuantity> getIngredientquantities() {
+        return ingredientquantities;
     }
 
-    public void setRecipes(List<Recipe> recipes) {
-        this.recipes = recipes;
+    public void setIngredientquantities(Set<IngredientQuantity> ingredientquantities) {
+        this.ingredientquantities = ingredientquantities;
     }
 }

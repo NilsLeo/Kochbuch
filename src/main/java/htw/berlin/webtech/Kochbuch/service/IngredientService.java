@@ -1,11 +1,9 @@
 package htw.berlin.webtech.Kochbuch.service;
 
 import htw.berlin.webtech.Kochbuch.persistence.IngredientEntity;
-import htw.berlin.webtech.Kochbuch.persistence.RecipeEntity;
 import htw.berlin.webtech.Kochbuch.persistence.IngredientRepository;
 import htw.berlin.webtech.Kochbuch.web.api.Ingredient;
 import htw.berlin.webtech.Kochbuch.web.api.IngredientManipulationRequest;
-import htw.berlin.webtech.Kochbuch.web.api.Recipe;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -32,7 +30,7 @@ public class IngredientService {
     }
 
     public Ingredient create(IngredientManipulationRequest request) {
-        var IngredientEntity = new IngredientEntity(request.getIngredientName(), request.getCalories(), request.getRecipeEntities());
+        var IngredientEntity = new IngredientEntity(request.getIngredientName(), request.getCalories(), request.getIngredientquantities());
         IngredientEntity = IngredientRepository.save(IngredientEntity);
         return transformEntity(IngredientEntity);
     }
@@ -54,7 +52,8 @@ public class IngredientService {
                 IngredientEntity.getIngredient_id(),
                 IngredientEntity.getIngredientName(),
                 IngredientEntity.getCalories(),
-        );
+                IngredientEntity.getIngredientquantities()
+                );
     }
 
     public boolean deleteById(Long id) {

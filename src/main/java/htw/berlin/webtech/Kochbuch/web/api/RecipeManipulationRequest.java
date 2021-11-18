@@ -1,15 +1,16 @@
 package htw.berlin.webtech.Kochbuch.web.api;
 
 import htw.berlin.webtech.Kochbuch.persistence.IngredientEntity;
+import htw.berlin.webtech.Kochbuch.persistence.IngredientQuantity;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class RecipeManipulationRequest {
     private String recipeName;
     private String description;
     private int duration;
-    private List<IngredientEntity> ingredientEntities;
+    Set<IngredientQuantity> ingredientQuantities;
 
     public RecipeManipulationRequest(String recipeName) {
         this.recipeName = recipeName;
@@ -39,12 +40,12 @@ public class RecipeManipulationRequest {
         this.duration = duration;
     }
 
-    public List<IngredientEntity> getIngredientEntities() {
-        return ingredientEntities;
+    public Set<IngredientQuantity> getIngredientQuantities() {
+        return ingredientQuantities;
     }
 
-    public void setIngredientEntities(List<IngredientEntity> ingredientEntities) {
-        this.ingredientEntities = ingredientEntities;
+    public void setIngredientQuantities(Set<IngredientQuantity> ingredientQuantities) {
+        this.ingredientQuantities = ingredientQuantities;
     }
 }
 

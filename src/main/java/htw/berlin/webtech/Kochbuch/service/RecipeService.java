@@ -2,7 +2,6 @@ package htw.berlin.webtech.Kochbuch.service;
 
 import htw.berlin.webtech.Kochbuch.persistence.RecipeEntity;
 import htw.berlin.webtech.Kochbuch.persistence.RecipeRepository;
-import htw.berlin.webtech.Kochbuch.web.api.Ingredient;
 import htw.berlin.webtech.Kochbuch.web.api.Recipe;
 import htw.berlin.webtech.Kochbuch.web.api.RecipeManipulationRequest;
 import org.springframework.stereotype.Service;
@@ -31,7 +30,7 @@ public class RecipeService {
     }
 
     public Recipe create(RecipeManipulationRequest request) {
-        var RecipeEntity = new RecipeEntity(request.getRecipeName(), request.getDescription(), request.getDuration(), request.getIngredientEntities());
+        var RecipeEntity = new RecipeEntity(request.getRecipeName(), request.getDescription(), request.getDuration(), request.getIngredientQuantities());
         RecipeEntity = RecipeRepository.save(RecipeEntity);
         return transformEntity(RecipeEntity);
     }
@@ -45,7 +44,7 @@ public class RecipeService {
         RecipeEntity.setRecipeName(request.getRecipeName());
         RecipeEntity.setDescription(request.getDescription());
         RecipeEntity.setDuration(request.getDuration());
-        RecipeEntity.setIngredientEntities(request.getIngredientEntities());
+        RecipeEntity.setIngredientQuantities(request.getIngredientQuantities());
         RecipeEntity = RecipeRepository.save(RecipeEntity);
         return transformEntity(RecipeEntity);
     }
@@ -56,7 +55,7 @@ public class RecipeService {
                 RecipeEntity.getRecipeName(),
                 RecipeEntity.getDescription(),
                 RecipeEntity.getDuration(),
-                RecipeEntity.convertIngredientEntityListToIngredientList(RecipeEntity.getIngredientEntities())
+                RecipeEntity.getIngredientQuantities()
         );
     }
 
