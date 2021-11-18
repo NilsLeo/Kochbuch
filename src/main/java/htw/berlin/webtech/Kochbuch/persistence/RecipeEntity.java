@@ -1,24 +1,20 @@
 package htw.berlin.webtech.Kochbuch.persistence;
 
 
-import htw.berlin.webtech.Kochbuch.web.api.Ingredient;
-
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 
-@Entity(name = "recipes")
+@Entity(name = "recipe")
 public class RecipeEntity {
     @OneToMany(mappedBy = "recipe")
     Set<IngredientQuantity> ingredientQuantities;
     //@Column ist optional:damit kann man Name und restrictions usw des sql columns festlegen
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long recipe_id;
+    private long id;
     @Column(nullable = false)
     private String recipeName;
-    @Column(nullable = false)
+    @Column(nullable = false, length = 10000)
     private String description;
     @Column(nullable = false)
     private int duration;
@@ -34,12 +30,8 @@ public class RecipeEntity {
 
     }
 
-    public long getRecipe_id() {
-        return recipe_id;
-    }
-
-    public void setRecipe_id(long recipe_id) {
-        this.recipe_id = recipe_id;
+    public long getId() {
+        return id;
     }
 
     public String getRecipeName() {

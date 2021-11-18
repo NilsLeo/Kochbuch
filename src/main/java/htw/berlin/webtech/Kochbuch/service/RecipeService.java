@@ -51,7 +51,7 @@ public class RecipeService {
 
     private Recipe transformEntity(RecipeEntity RecipeEntity) {
         return new Recipe(
-                RecipeEntity.getRecipe_id(),
+                RecipeEntity.getId(),
                 RecipeEntity.getRecipeName(),
                 RecipeEntity.getDescription(),
                 RecipeEntity.getDuration(),

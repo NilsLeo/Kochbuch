@@ -49,11 +49,11 @@ public class IngredientService {
 
     private Ingredient transformEntity(IngredientEntity IngredientEntity) {
         return new Ingredient(
-                IngredientEntity.getIngredient_id(),
+                IngredientEntity.getId(),
                 IngredientEntity.getIngredientName(),
                 IngredientEntity.getCalories(),
                 IngredientEntity.getIngredientquantities()
-                );
+        );
     }
 
     public boolean deleteById(Long id) {

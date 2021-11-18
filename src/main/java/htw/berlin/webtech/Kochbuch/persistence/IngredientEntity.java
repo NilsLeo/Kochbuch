@@ -3,7 +3,7 @@ package htw.berlin.webtech.Kochbuch.persistence;
 import javax.persistence.*;
 import java.util.Set;
 
-@Entity(name = "ingredients")
+@Entity(name = "ingredient")
 public class IngredientEntity {
 
 
@@ -11,7 +11,8 @@ public class IngredientEntity {
     Set<IngredientQuantity> ingredientquantities;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long ingredient_id;
+    @Column
+    private long id;
     @Column(nullable = false)
     private String ingredientName;
     @Column(nullable = false)
@@ -27,12 +28,8 @@ public class IngredientEntity {
 
     }
 
-    public long getIngredient_id() {
-        return ingredient_id;
-    }
-
-    public void setIngredient_id(long ingredient_id) {
-        this.ingredient_id = ingredient_id;
+    public long getId() {
+        return id;
     }
 
     public String getIngredientName() {

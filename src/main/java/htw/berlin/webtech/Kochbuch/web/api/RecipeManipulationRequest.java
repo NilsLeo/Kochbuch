@@ -1,16 +1,14 @@
 package htw.berlin.webtech.Kochbuch.web.api;
 
-import htw.berlin.webtech.Kochbuch.persistence.IngredientEntity;
 import htw.berlin.webtech.Kochbuch.persistence.IngredientQuantity;
 
-import java.util.List;
 import java.util.Set;
 
 public class RecipeManipulationRequest {
+    Set<IngredientQuantity> ingredientQuantities;
     private String recipeName;
     private String description;
     private int duration;
-    Set<IngredientQuantity> ingredientQuantities;
 
     public RecipeManipulationRequest(String recipeName) {
         this.recipeName = recipeName;

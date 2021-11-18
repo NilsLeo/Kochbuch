@@ -2,15 +2,14 @@ package htw.berlin.webtech.Kochbuch.web.api;
 
 import htw.berlin.webtech.Kochbuch.persistence.IngredientQuantity;
 
-import java.util.List;
 import java.util.Set;
 
 public class Recipe {
+    Set<IngredientQuantity> ingredientquantities;
     private long id;
     private String recipeName;
     private String description;
     private int duration;
-    Set<IngredientQuantity> ingredientquantities;
 
     public Recipe(long id, String recipeName, String description, int duration, Set<IngredientQuantity> ingredientquantities) {
         this.id = id;
