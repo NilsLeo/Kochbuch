@@ -1,11 +1,11 @@
 package htw.berlin.webtech.Kochbuch.web.api;
 
-import htw.berlin.webtech.Kochbuch.persistence.IngredientQuantity;
+import htw.berlin.webtech.Kochbuch.persistence.IngredientQuantityEntity;
 
 import java.util.Set;
 
 public class IngredientManipulationRequest {
-    Set<IngredientQuantity> ingredientquantities;
+    Set<IngredientQuantityEntity> ingredientquantities;
     private String ingredientName;
     private int calories;
 
@@ -29,11 +29,11 @@ public class IngredientManipulationRequest {
         this.calories = calories;
     }
 
-    public Set<IngredientQuantity> getIngredientquantities() {
+    public Set<IngredientQuantityEntity> getIngredientquantities() {
         return ingredientquantities;
     }
 
-    public void setIngredientquantities(Set<IngredientQuantity> ingredientquantities) {
+    public void setIngredientquantities(Set<IngredientQuantityEntity> ingredientquantities) {
         this.ingredientquantities = ingredientquantities;
     }
 }

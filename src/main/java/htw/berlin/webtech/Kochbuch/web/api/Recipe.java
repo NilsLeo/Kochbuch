@@ -1,6 +1,6 @@
 package htw.berlin.webtech.Kochbuch.web.api;
 
-import htw.berlin.webtech.Kochbuch.persistence.IngredientQuantity;
+import htw.berlin.webtech.Kochbuch.persistence.IngredientQuantityEntity;
 
 import java.util.Set;
 

@@ -7,7 +7,7 @@ import java.util.Set;
 @Entity(name = "recipe")
 public class RecipeEntity {
     @OneToMany(mappedBy = "recipe")
-    Set<IngredientQuantity> ingredientQuantities;
+    Set<IngredientQuantityEntity> ingredientQuantities;
     //@Column ist optional:damit kann man Name und restrictions usw des sql columns festlegen
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,7 +19,7 @@ public class RecipeEntity {
     @Column(nullable = false)
     private int duration;
 
-    public RecipeEntity(String recipeName, String description, int duration, Set<IngredientQuantity> ingredientQuantities) {
+    public RecipeEntity(String recipeName, String description, int duration, Set<IngredientQuantityEntity> ingredientQuantities) {
         this.recipeName = recipeName;
         this.description = description;
         this.duration = duration;
@@ -58,11 +58,11 @@ public class RecipeEntity {
         this.duration = duration;
     }
 
-    public Set<IngredientQuantity> getIngredientQuantities() {
+    public Set<IngredientQuantityEntity> getIngredientQuantities() {
         return ingredientQuantities;
     }
 
-    public void setIngredientQuantities(Set<IngredientQuantity> ingredientQuantities) {
+    public void setIngredientQuantities(Set<IngredientQuantityEntity> ingredientQuantities) {
         this.ingredientQuantities = ingredientQuantities;
     }
 

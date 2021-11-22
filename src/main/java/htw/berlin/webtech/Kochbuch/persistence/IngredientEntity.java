@@ -8,7 +8,7 @@ public class IngredientEntity {
 
 
     @OneToMany(mappedBy = "ingredient")
-    Set<IngredientQuantity> ingredientquantities;
+    Set<IngredientQuantityEntity> ingredientquantities;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
@@ -18,7 +18,7 @@ public class IngredientEntity {
     @Column(nullable = false)
     private int calories;
 
-    public IngredientEntity(String ingredientName, int calories, Set<IngredientQuantity> ingredientquantities) {
+    public IngredientEntity(String ingredientName, int calories, Set<IngredientQuantityEntity> ingredientquantities) {
         this.ingredientName = ingredientName;
         this.calories = calories;
         this.ingredientquantities = ingredientquantities;
@@ -48,11 +48,11 @@ public class IngredientEntity {
         this.calories = calories;
     }
 
-    public Set<IngredientQuantity> getIngredientquantities() {
+    public Set<IngredientQuantityEntity> getIngredientquantities() {
         return ingredientquantities;
     }
 
-    public void setIngredientquantities(Set<IngredientQuantity> ingredientquantities) {
+    public void setIngredientquantities(Set<IngredientQuantityEntity> ingredientquantities) {
         this.ingredientquantities = ingredientquantities;
     }
 }

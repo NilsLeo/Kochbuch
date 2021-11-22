@@ -1,23 +1,23 @@
-package htw.berlin.webtech.Kochbuch.persistence;
+package htw.berlin.webtech.Kochbuch.web.api;
 
-import javax.persistence.*;
+import htw.berlin.webtech.Kochbuch.persistence.IngredientEntity;
+import htw.berlin.webtech.Kochbuch.persistence.IngredientQuantityKey;
+import htw.berlin.webtech.Kochbuch.persistence.RecipeEntity;
 
-@Entity
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
+
 public class IngredientQuantity {
-    @EmbeddedId
     IngredientQuantityKey id;
-
-    @MapsId("recipeid")
-    @ManyToOne
-    @JoinColumn(name = "recipe_id")
     RecipeEntity recipe;
-
-    @MapsId("ingredientid")
-    @ManyToOne
-    @JoinColumn(name = "ingredient_id")
     IngredientEntity ingredient;
 
-    int quantity;
+    public IngredientQuantity(IngredientQuantityKey id, RecipeEntity recipe, IngredientEntity ingredient) {
+        this.id = id;
+        this.recipe = recipe;
+        this.ingredient = ingredient;
+    }
 
     public IngredientQuantityKey getId() {
         return id;
@@ -41,13 +41,5 @@ public class IngredientQuantity {
 
     public void setIngredient(IngredientEntity ingredient) {
         this.ingredient = ingredient;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
     }
 }
