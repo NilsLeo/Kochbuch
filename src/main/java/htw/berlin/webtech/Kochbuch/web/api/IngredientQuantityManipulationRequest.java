@@ -1,11 +1,11 @@
 package htw.berlin.webtech.Kochbuch.web.api;
 
-public class IngredientQuantity {
+public class IngredientQuantityManipulationRequest {
     long ingredientid;
     int quantity;
     String unit;
 
-    public IngredientQuantity(long ingredientid, int quantity, String unit) {
+    public IngredientQuantityManipulationRequest(long ingredientid, int quantity, String unit) {
         this.ingredientid = ingredientid;
         this.quantity = quantity;
         this.unit = unit;

@@ -4,9 +4,12 @@ import htw.berlin.webtech.Kochbuch.persistence.IngredientEntity;
 import htw.berlin.webtech.Kochbuch.persistence.IngredientRepository;
 import htw.berlin.webtech.Kochbuch.web.api.Ingredient;
 import htw.berlin.webtech.Kochbuch.web.api.IngredientManipulationRequest;
+import htw.berlin.webtech.Kochbuch.web.api.IngredientQuantity;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -20,19 +23,19 @@ public class IngredientService {
     public List<Ingredient> findAll() {
         List<IngredientEntity> Ingredients = IngredientRepository.findAll();
         return Ingredients.stream()
-                .map(this::transformEntity)
+                .map(this::transformIngredientEntity)
                 .collect(Collectors.toList());
     }
 
     public Ingredient findById(Long id) {
         var IngredientEntity = IngredientRepository.findById(id);
-        return IngredientEntity.map(this::transformEntity).orElse(null);
+        return IngredientEntity.map(this::transformIngredientEntity).orElse(null);
     }
 
     public Ingredient create(IngredientManipulationRequest request) {
         var IngredientEntity = new IngredientEntity(request.getIngredientName(), request.getCalories(), request.getIngredientquantities());
         IngredientEntity = IngredientRepository.save(IngredientEntity);
-        return transformEntity(IngredientEntity);
+        return transformIngredientEntity(IngredientEntity);
     }
 
     public Ingredient update(Long id, IngredientManipulationRequest request) {
@@ -44,15 +47,18 @@ public class IngredientService {
         IngredientEntity.setIngredientName(request.getIngredientName());
         IngredientEntity.setCalories(request.getCalories());
         IngredientEntity = IngredientRepository.save(IngredientEntity);
-        return transformEntity(IngredientEntity);
+        return transformIngredientEntity(IngredientEntity);
     }
 
-    private Ingredient transformEntity(IngredientEntity IngredientEntity) {
+    private Ingredient transformIngredientEntity(IngredientEntity ingredientEntity) {
+        Set<IngredientQuantity> set = new HashSet<>();
+        ingredientEntity.getIngredientQuantities().forEach(e -> set.add(e.transformEntity(e)));
+
         return new Ingredient(
-                IngredientEntity.getId(),
-                IngredientEntity.getIngredientName(),
-                IngredientEntity.getCalories(),
-                IngredientEntity.getIngredientquantities()
+                ingredientEntity.getId(),
+                ingredientEntity.getIngredientName(),
+                ingredientEntity.getCalories(),
+                set
         );
     }
 

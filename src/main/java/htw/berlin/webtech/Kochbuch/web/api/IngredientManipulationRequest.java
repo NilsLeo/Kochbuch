@@ -9,8 +9,10 @@ public class IngredientManipulationRequest {
     private String ingredientName;
     private int calories;
 
-    public IngredientManipulationRequest(String IngredientName) {
-        this.ingredientName = IngredientName;
+    public IngredientManipulationRequest(Set<IngredientQuantityEntity> ingredientquantities, String ingredientName, int calories) {
+        this.ingredientquantities = ingredientquantities;
+        this.ingredientName = ingredientName;
+        this.calories = calories;
     }
 
     public String getIngredientName() {

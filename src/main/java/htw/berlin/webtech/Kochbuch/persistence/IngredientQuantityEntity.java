@@ -1,5 +1,7 @@
 package htw.berlin.webtech.Kochbuch.persistence;
 
+import htw.berlin.webtech.Kochbuch.web.api.IngredientQuantity;
+
 import javax.persistence.*;
 
 @Entity
@@ -18,6 +20,19 @@ public class IngredientQuantityEntity {
     IngredientEntity ingredient;
 
     int quantity;
+    String unit;
+
+    protected IngredientQuantityEntity() {
+
+    }
+
+    public String getUnit() {
+        return unit;
+    }
+
+    public void setUnit(String unit) {
+        this.unit = unit;
+    }
 
     public IngredientQuantityKey getId() {
         return id;
@@ -49,5 +64,13 @@ public class IngredientQuantityEntity {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
+    }
+
+    public IngredientQuantity transformEntity(IngredientQuantityEntity IngredientQuantityEntity) {
+        return new IngredientQuantity(
+                IngredientQuantityEntity.getIngredient().getId(),
+                IngredientQuantityEntity.getQuantity(),
+                IngredientQuantityEntity.getUnit()
+        );
     }
 }
