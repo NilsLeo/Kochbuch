@@ -6,7 +6,7 @@ import java.util.List;
 
 @Entity(name = "recipe")
 public class RecipeEntity {
-    @OneToMany(mappedBy = "recipe")
+    @OneToMany(mappedBy = "recipe",fetch = FetchType.EAGER)
     List<IngredientQuantityEntity> ingredientQuantities;
     //@Column ist optional:damit kann man Name und restrictions usw des sql columns festlegen
     @Id

@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 public class IngredientEntity {
 
 
-    @OneToMany(mappedBy = "ingredient")
+    @OneToMany(mappedBy = "ingredient",fetch = FetchType.EAGER)
     List<IngredientQuantityEntity> ingredientQuantities;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
