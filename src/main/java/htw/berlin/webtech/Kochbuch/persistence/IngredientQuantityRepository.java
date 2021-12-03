@@ -11,9 +11,7 @@ import java.util.stream.Collectors;
 @Repository
 public interface IngredientQuantityRepository extends JpaRepository<IngredientQuantityEntity, IngredientQuantityKey> {
 
-    List<IngredientQuantityEntity> findAllByIngredientQuantity(int ingredientQuantity);
-
-    List<IngredientQuantityEntity> findById_Recipeid(long recipeid);
+        List<IngredientQuantityEntity> findById_Recipeid(long recipeid);
 
 
 }
