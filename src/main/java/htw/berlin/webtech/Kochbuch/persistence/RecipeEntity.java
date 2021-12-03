@@ -2,12 +2,12 @@ package htw.berlin.webtech.Kochbuch.persistence;
 
 
 import javax.persistence.*;
-import java.util.Set;
+import java.util.List;
 
 @Entity(name = "recipe")
 public class RecipeEntity {
     @OneToMany(mappedBy = "recipe")
-    Set<IngredientQuantityEntity> ingredientQuantities;
+    List<IngredientQuantityEntity> ingredientQuantities;
     //@Column ist optional:damit kann man Name und restrictions usw des sql columns festlegen
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,7 +19,7 @@ public class RecipeEntity {
     @Column(nullable = false)
     private int duration;
 
-    public RecipeEntity(String recipeName, String description, int duration, Set<IngredientQuantityEntity> ingredientQuantities) {
+    public RecipeEntity(String recipeName, String description, int duration, List<IngredientQuantityEntity> ingredientQuantities) {
         this.recipeName = recipeName;
         this.description = description;
         this.duration = duration;
@@ -58,12 +58,11 @@ public class RecipeEntity {
         this.duration = duration;
     }
 
-    public Set<IngredientQuantityEntity> getIngredientQuantities() {
+    public List<IngredientQuantityEntity> getIngredientQuantities() {
         return ingredientQuantities;
     }
 
-    public void setIngredientQuantities(Set<IngredientQuantityEntity> ingredientQuantities) {
+    public void setIngredientQuantities(List<IngredientQuantityEntity> ingredientQuantities) {
         this.ingredientQuantities = ingredientQuantities;
     }
-
 }

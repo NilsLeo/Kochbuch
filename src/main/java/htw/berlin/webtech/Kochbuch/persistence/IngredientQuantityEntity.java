@@ -3,6 +3,8 @@ package htw.berlin.webtech.Kochbuch.persistence;
 import htw.berlin.webtech.Kochbuch.web.api.IngredientQuantity;
 
 import javax.persistence.*;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
 public class IngredientQuantityEntity {
@@ -18,8 +20,9 @@ public class IngredientQuantityEntity {
     @ManyToOne
     @JoinColumn(name = "ingredient_id")
     IngredientEntity ingredient;
-
+    @Column(nullable = false)
     int quantity;
+    @Column(nullable = false)
     String unit;
 
     protected IngredientQuantityEntity() {
@@ -64,13 +67,5 @@ public class IngredientQuantityEntity {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
-    }
-
-    public IngredientQuantity transformEntity(IngredientQuantityEntity IngredientQuantityEntity) {
-        return new IngredientQuantity(
-                IngredientQuantityEntity.getIngredient().getId(),
-                IngredientQuantityEntity.getQuantity(),
-                IngredientQuantityEntity.getUnit()
-        );
     }
 }

@@ -1,14 +1,15 @@
 package htw.berlin.webtech.Kochbuch.web.api;
 
-import java.util.Set;
+import java.util.List;
+
 
 public class Ingredient {
-    Set<IngredientQuantity> ingredientquantities;
+    List<IngredientQuantity> ingredientquantities;
     private long ingredient_id;
     private String ingredientName;
     private int calories;
 
-    public Ingredient(long ingredient_id, String ingredientName, int calories, Set<IngredientQuantity> ingredientquantities) {
+    public Ingredient(long ingredient_id, String ingredientName, int calories, List<IngredientQuantity> ingredientquantities) {
         this.ingredient_id = ingredient_id;
         this.ingredientName = ingredientName;
         this.calories = calories;
@@ -39,11 +40,11 @@ public class Ingredient {
         this.calories = calories;
     }
 
-    public Set<IngredientQuantity> getIngredientquantities() {
+    public List<IngredientQuantity> getIngredientquantities() {
         return ingredientquantities;
     }
 
-    public void setIngredientquantities(Set<IngredientQuantity> ingredientquantities) {
+    public void setIngredientquantities(List<IngredientQuantity> ingredientquantities) {
         this.ingredientquantities = ingredientquantities;
     }
 }

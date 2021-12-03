@@ -5,9 +5,7 @@ import htw.berlin.webtech.Kochbuch.persistence.IngredientQuantityRepository;
 import htw.berlin.webtech.Kochbuch.web.api.IngredientQuantity;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -18,18 +16,19 @@ public class IngredientQuantityService {
         this.ingredientQuantityRepository = ingredientQuantityRepository;
     }
 
-    private IngredientQuantity transformIngredientQuantityEntity(IngredientQuantityEntity IngredientQuantityEntity) {
+    public IngredientQuantity transformIngredientQuantityEntity(IngredientQuantityEntity IngredientQuantityEntity) {
         return new IngredientQuantity(
+                IngredientQuantityEntity.getRecipe().getId(),
                 IngredientQuantityEntity.getIngredient().getId(),
                 IngredientQuantityEntity.getQuantity(),
                 IngredientQuantityEntity.getUnit()
         );
     }
 
-    private Set<IngredientQuantity> transformIngredientQuantityEntitySet(Set<IngredientQuantityEntity> ingredientQuantityEntities) {
-        Set<IngredientQuantity> set = new HashSet<>();
-        ingredientQuantityEntities.forEach(ingredientQuantityEntity -> set.add(ingredientQuantityEntity.transformEntity(ingredientQuantityEntity)));
-        return set;
+    private List<IngredientQuantity> transformIngredientQuantityEntityList(List<IngredientQuantityEntity> ingredientQuantityEntities) {
+        return ingredientQuantityEntities.stream()
+                .map(this::transformIngredientQuantityEntity)
+                .collect(Collectors.toList());
     }
 
     public List<IngredientQuantity> findAll() {
@@ -39,9 +38,9 @@ public class IngredientQuantityService {
                 .collect(Collectors.toList());
     }
 
-    public List<IngredientQuantityEntity> findById_Recipeid(long recipeid) {
+    public List<IngredientQuantity> findByRecipeid(long recipeid) {
         var IngredientQuantityEntity = ingredientQuantityRepository.findById_Recipeid(recipeid);
-        return IngredientQuantityEntity;
+        return IngredientQuantityEntity.stream().map(this::transformIngredientQuantityEntity).collect(Collectors.toList());
     }
 
 }
