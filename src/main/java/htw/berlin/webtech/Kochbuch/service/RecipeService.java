@@ -1,9 +1,8 @@
 package htw.berlin.webtech.Kochbuch.service;
 
-import htw.berlin.webtech.Kochbuch.persistence.IngredientQuantityEntity;
+import htw.berlin.webtech.Kochbuch.persistence.IngredientRepository;
 import htw.berlin.webtech.Kochbuch.persistence.RecipeEntity;
 import htw.berlin.webtech.Kochbuch.persistence.RecipeRepository;
-import htw.berlin.webtech.Kochbuch.web.api.IngredientQuantity;
 import htw.berlin.webtech.Kochbuch.web.api.Recipe;
 import htw.berlin.webtech.Kochbuch.web.api.RecipeManipulationRequest;
 import org.springframework.stereotype.Service;
@@ -14,62 +13,47 @@ import java.util.stream.Collectors;
 @Service
 public class RecipeService {
     private final RecipeRepository recipeRepository;
+    private final RecipeTransformer recipeTransformer;
+    private final IngredientRepository ingredientRepository;
 
-    public RecipeService(RecipeRepository recipeRepository) {
+    public RecipeService(RecipeRepository recipeRepository, RecipeTransformer recipeTransformer, IngredientRepository ingredientRepository) {
         this.recipeRepository = recipeRepository;
+        this.recipeTransformer = recipeTransformer;
+        this.ingredientRepository = ingredientRepository;
     }
 
     public List<Recipe> findAll() {
         List<RecipeEntity> Recipes = recipeRepository.findAll();
         return Recipes.stream()
-                .map(this::transformEntity)
+                .map(recipeTransformer::transformEntity)
                 .collect(Collectors.toList());
     }
 
     public Recipe findById(Long id) {
         var RecipeEntity = recipeRepository.findById(id);
-        return RecipeEntity.map(this::transformEntity).orElse(null);
+        return RecipeEntity.map(recipeTransformer::transformEntity).orElse(null);
     }
 
     public Recipe create(RecipeManipulationRequest request) {
-
-        var RecipeEntity = new RecipeEntity(request.getRecipeName(), request.getDescription(), request.getDuration(), request.getIngredientQuantities());
-        RecipeEntity = recipeRepository.save(RecipeEntity);
-        return transformEntity(RecipeEntity);
+        var ingredients = ingredientRepository.findAllById(request.getIngredientIds());
+        var recipeEntity = new RecipeEntity(request.getRecipeName(), request.getDescription(), request.getDuration(), ingredients);
+        recipeEntity = recipeRepository.save(recipeEntity);
+        return recipeTransformer.transformEntity(recipeEntity);
     }
 
     public Recipe update(Long id, RecipeManipulationRequest request) {
         var RecipeEntityOptional = recipeRepository.findById(id);
+        var ingredients = ingredientRepository.findAllById(request.getIngredientIds());
         if (RecipeEntityOptional.isEmpty()) {
             return null;
         }
-        var RecipeEntity = RecipeEntityOptional.get();
-        RecipeEntity.setRecipeName(request.getRecipeName());
-        RecipeEntity.setDescription(request.getDescription());
-        RecipeEntity.setDuration(request.getDuration());
-        RecipeEntity.setIngredientQuantities(request.getIngredientQuantities());
-        RecipeEntity = recipeRepository.save(RecipeEntity);
-        return transformEntity(RecipeEntity);
-    }
-
-    public IngredientQuantity transformIngredientQuantityEntity(IngredientQuantityEntity IngredientQuantityEntity) {
-        return new IngredientQuantity(
-                IngredientQuantityEntity.getRecipe().getId(),
-                IngredientQuantityEntity.getIngredient().getId(),
-                IngredientQuantityEntity.getQuantity(),
-                IngredientQuantityEntity.getUnit()
-        );
-    }
-
-    private Recipe transformEntity(RecipeEntity recipeEntity) {
-
-        return new Recipe(
-                recipeEntity.getId(),
-                recipeEntity.getRecipeName(),
-                recipeEntity.getDescription(),
-                recipeEntity.getDuration(),
-                recipeEntity.getIngredientQuantities().stream().map(this::transformIngredientQuantityEntity).collect(Collectors.toList())
-        );
+        var recipeEntity = RecipeEntityOptional.get();
+        recipeEntity.setRecipeName(request.getRecipeName());
+        recipeEntity.setDescription(request.getDescription());
+        recipeEntity.setDuration(request.getDuration());
+        recipeEntity.setIngredients(ingredients);
+        recipeEntity = recipeRepository.save(recipeEntity);
+        return recipeTransformer.transformEntity(recipeEntity);
     }
 
     public boolean deleteById(Long id) {

@@ -1,19 +1,18 @@
 package htw.berlin.webtech.Kochbuch.web.api;
 
-import java.util.List;
-
-
 public class Ingredient {
-    List<IngredientQuantity> ingredientQuantities;
     private long ingredient_id;
     private String ingredientName;
-    private int calories;
+    private int amount;
+    private String unit;
+    private Long recipeId;
 
-    public Ingredient(long ingredient_id, String ingredientName, int calories, List<IngredientQuantity> ingredientQuantities) {
+    public Ingredient(long ingredient_id, String ingredientName, int amount, String unit, Long recipeId) {
         this.ingredient_id = ingredient_id;
         this.ingredientName = ingredientName;
-        this.calories = calories;
-        this.ingredientQuantities = ingredientQuantities;
+        this.amount = amount;
+        this.unit = unit;
+        this.recipeId = recipeId;
     }
 
     public long getIngredient_id() {
@@ -32,19 +31,27 @@ public class Ingredient {
         this.ingredientName = ingredientName;
     }
 
-    public int getCalories() {
-        return calories;
+    public int getAmount() {
+        return amount;
     }
 
-    public void setCalories(int calories) {
-        this.calories = calories;
+    public void setAmount(int amount) {
+        this.amount = amount;
     }
 
-    public List<IngredientQuantity> getIngredientQuantities() {
-        return ingredientQuantities;
+    public String getUnit() {
+        return unit;
     }
 
-    public void setIngredientQuantities(List<IngredientQuantity> ingredientQuantities) {
-        this.ingredientQuantities = ingredientQuantities;
+    public void setUnit(String unit) {
+        this.unit = unit;
+    }
+
+    public Long getRecipeId() {
+        return recipeId;
+    }
+
+    public void setRecipeId(Long recipeId) {
+        this.recipeId = recipeId;
     }
 }

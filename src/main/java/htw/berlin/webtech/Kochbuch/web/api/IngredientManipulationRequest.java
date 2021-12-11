@@ -1,18 +1,24 @@
 package htw.berlin.webtech.Kochbuch.web.api;
 
-import htw.berlin.webtech.Kochbuch.persistence.IngredientQuantityEntity;
-
-import java.util.List;
-
 public class IngredientManipulationRequest {
-    List<IngredientQuantityEntity> ingredientQuantities;
     private String ingredientName;
-    private int calories;
+    private int amount;
+    private String unit;
+    private Long recipeId;
 
-    public IngredientManipulationRequest(List<IngredientQuantityEntity> ingredientQuantities, String ingredientName, int calories) {
-        this.ingredientQuantities = ingredientQuantities;
+    public IngredientManipulationRequest(String ingredientName, int amount, String unit, Long recipeId) {
         this.ingredientName = ingredientName;
-        this.calories = calories;
+        this.amount = amount;
+        this.unit = unit;
+        this.recipeId = recipeId;
+    }
+
+    public Long getRecipeId() {
+        return recipeId;
+    }
+
+    public void setRecipeId(Long recipeId) {
+        this.recipeId = recipeId;
     }
 
     public String getIngredientName() {
@@ -23,19 +29,19 @@ public class IngredientManipulationRequest {
         this.ingredientName = ingredientName;
     }
 
-    public int getCalories() {
-        return calories;
+    public int getAmount() {
+        return amount;
     }
 
-    public void setCalories(int calories) {
-        this.calories = calories;
+    public void setAmount(int amount) {
+        this.amount = amount;
     }
 
-    public List<IngredientQuantityEntity> getIngredientQuantities() {
-        return ingredientQuantities;
+    public String getUnit() {
+        return unit;
     }
 
-    public void setIngredientQuantities(List<IngredientQuantityEntity> ingredientQuantities) {
-        this.ingredientQuantities = ingredientQuantities;
+    public void setUnit(String unit) {
+        this.unit = unit;
     }
 }

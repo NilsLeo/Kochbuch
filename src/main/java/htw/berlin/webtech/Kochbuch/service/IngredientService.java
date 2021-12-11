@@ -1,11 +1,11 @@
 package htw.berlin.webtech.Kochbuch.service;
 
 import htw.berlin.webtech.Kochbuch.persistence.IngredientEntity;
-import htw.berlin.webtech.Kochbuch.persistence.IngredientQuantityEntity;
 import htw.berlin.webtech.Kochbuch.persistence.IngredientRepository;
+import htw.berlin.webtech.Kochbuch.persistence.RecipeRepository;
+import htw.berlin.webtech.Kochbuch.persistence.Unit;
 import htw.berlin.webtech.Kochbuch.web.api.Ingredient;
 import htw.berlin.webtech.Kochbuch.web.api.IngredientManipulationRequest;
-import htw.berlin.webtech.Kochbuch.web.api.IngredientQuantity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,62 +14,49 @@ import java.util.stream.Collectors;
 @Service
 public class IngredientService {
     private final IngredientRepository ingredientRepository;
+    private final RecipeRepository recipeRepository;
+    private final RecipeTransformer recipeTransformer;
+    private final IngredientTransformer ingredientTransformer;
 
-    public IngredientService(IngredientRepository ingredientRepository) {
+    public IngredientService(IngredientRepository ingredientRepository, RecipeRepository recipeRepository, RecipeTransformer recipeTransformer, IngredientTransformer ingredientTransformer) {
         this.ingredientRepository = ingredientRepository;
+        this.recipeRepository = recipeRepository;
+        this.recipeTransformer = recipeTransformer;
+        this.ingredientTransformer = ingredientTransformer;
     }
 
     public List<Ingredient> findAll() {
         List<IngredientEntity> Ingredients = ingredientRepository.findAll();
         return Ingredients.stream()
-                .map(this::transformIngredientEntity)
+                .map(ingredientTransformer::transformEntity)
                 .collect(Collectors.toList());
     }
 
     public Ingredient findById(Long id) {
         var ingredientEntity = ingredientRepository.findById(id);
-        return ingredientEntity.map(this::transformIngredientEntity).orElse(null);
+        return ingredientEntity.map(ingredientTransformer::transformEntity).orElse(null);
     }
-    public Ingredient findByIngredientName(String ingredientName){
-        var ingredientEntity=ingredientRepository.findByIngredientName(ingredientName);
-        return transformIngredientEntity(ingredientEntity);
-    }
+
     public Ingredient create(IngredientManipulationRequest request) {
-        var IngredientEntity = new IngredientEntity(request.getIngredientName(), request.getCalories(), request.getIngredientQuantities());
-        IngredientEntity = ingredientRepository.save(IngredientEntity);
-        return transformIngredientEntity(IngredientEntity);
+        var unit = Unit.valueOf(request.getUnit());
+        var recipe = recipeRepository.findById(request.getRecipeId()).orElseThrow();
+        var ingredientEntity = new IngredientEntity(request.getIngredientName(), request.getAmount(), unit, recipe);
+        ingredientEntity = ingredientRepository.save(ingredientEntity);
+        return ingredientTransformer.transformEntity(ingredientEntity);
     }
 
     public Ingredient update(Long id, IngredientManipulationRequest request) {
-        var IngredientEntityOptional = ingredientRepository.findById(id);
-        if (IngredientEntityOptional.isEmpty()) {
+        var ingredientEntityOptional = ingredientRepository.findById(id);
+        if (ingredientEntityOptional.isEmpty()) {
             return null;
         }
-        var IngredientEntity = IngredientEntityOptional.get();
-        IngredientEntity.setIngredientName(request.getIngredientName());
-        IngredientEntity.setCalories(request.getCalories());
-        IngredientEntity = ingredientRepository.save(IngredientEntity);
-        return transformIngredientEntity(IngredientEntity);
-    }
+        var ingredientEntity = ingredientEntityOptional.get();
+        ingredientEntity.setIngredientName(request.getIngredientName());
+        ingredientEntity.setAmount(request.getAmount());
+        ingredientEntity.setUnit(Unit.valueOf(request.getUnit()));
+        ingredientEntity = ingredientRepository.save(ingredientEntity);
 
-    private IngredientQuantity transformIngredientQuantityEntity(IngredientQuantityEntity IngredientQuantityEntity) {
-        return new IngredientQuantity(
-                IngredientQuantityEntity.getRecipe().getId(),
-                IngredientQuantityEntity.getIngredient().getId(),
-                IngredientQuantityEntity.getQuantity(),
-                IngredientQuantityEntity.getUnit()
-        );
-    }
-
-    private Ingredient transformIngredientEntity(IngredientEntity ingredientEntity) {
-
-        return new Ingredient(
-                ingredientEntity.getId(),
-                ingredientEntity.getIngredientName(),
-                ingredientEntity.getCalories(),
-                ingredientEntity.getIngredientQuantities().stream().map(this::transformIngredientQuantityEntity).collect(Collectors.toList())
-
-        );
+        return ingredientTransformer.transformEntity(ingredientEntity);
     }
 
     public boolean deleteById(Long id) {

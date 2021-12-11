@@ -2,15 +2,15 @@ package htw.berlin.webtech.Kochbuch.persistence;
 
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity(name = "recipe")
 public class RecipeEntity {
-    @OneToMany(mappedBy = "recipe",fetch = FetchType.EAGER)
-    List<IngredientQuantityEntity> ingredientQuantities;
-    //@Column ist optional:damit kann man Name und restrictions usw des sql columns festlegen
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private long id;
     @Column(nullable = false)
     private String recipeName;
@@ -18,12 +18,14 @@ public class RecipeEntity {
     private String description;
     @Column(nullable = false)
     private int duration;
+    @OneToMany(mappedBy = "recipe", fetch = FetchType.EAGER)
+    private List<IngredientEntity> ingredients = new ArrayList<>();
 
-    public RecipeEntity(String recipeName, String description, int duration, List<IngredientQuantityEntity> ingredientQuantities) {
+    public RecipeEntity(String recipeName, String description, int duration, List<IngredientEntity> ingredients) {
         this.recipeName = recipeName;
         this.description = description;
         this.duration = duration;
-        this.ingredientQuantities = ingredientQuantities;
+        this.ingredients = ingredients;
     }
 
     protected RecipeEntity() {
@@ -58,11 +60,11 @@ public class RecipeEntity {
         this.duration = duration;
     }
 
-    public List<IngredientQuantityEntity> getIngredientQuantities() {
-        return ingredientQuantities;
+    public List<IngredientEntity> getIngredients() {
+        return ingredients;
     }
 
-    public void setIngredientQuantities(List<IngredientQuantityEntity> ingredientQuantities) {
-        this.ingredientQuantities = ingredientQuantities;
+    public void setIngredients(List<IngredientEntity> ingredients) {
+        this.ingredients = ingredients;
     }
 }

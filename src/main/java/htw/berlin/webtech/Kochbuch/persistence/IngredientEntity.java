@@ -1,32 +1,33 @@
 package htw.berlin.webtech.Kochbuch.persistence;
 
-import htw.berlin.webtech.Kochbuch.web.api.IngredientQuantity;
-
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 @Entity(name = "ingredient")
 public class IngredientEntity {
 
 
-    @OneToMany(mappedBy = "ingredient",fetch = FetchType.EAGER)
-    List<IngredientQuantityEntity> ingredientQuantities =new ArrayList<>();
+    //@OneToMany(mappedBy = "ingredient",fetch = FetchType.EAGER)
+    //List<IngredientQuantityEntity> ingredientQuantities =new ArrayList<>();
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
     private long id;
     @Column(nullable = false)
     private String ingredientName;
-    @Column(nullable = false)
-    private int calories;
+    @Column
+    private int amount;
+    @Column
+    @Enumerated(value = EnumType.STRING)
+    private Unit unit;
+    @ManyToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "recipe_id", referencedColumnName = "id")
+    private RecipeEntity recipe;
 
-    public IngredientEntity(String ingredientName, int calories, List<IngredientQuantityEntity> ingredientquantities) {
+    public IngredientEntity(String ingredientName, int amount, Unit unit, RecipeEntity recipe) {
         this.ingredientName = ingredientName;
-        this.calories = calories;
-        this.ingredientQuantities = ingredientquantities;
+        this.amount = amount;
+        this.unit = unit;
+        this.recipe = recipe;
     }
 
     protected IngredientEntity() {
@@ -37,6 +38,10 @@ public class IngredientEntity {
         return id;
     }
 
+    public void setId(long id) {
+        this.id = id;
+    }
+
     public String getIngredientName() {
         return ingredientName;
     }
@@ -45,20 +50,27 @@ public class IngredientEntity {
         this.ingredientName = ingredientName;
     }
 
-    public int getCalories() {
-        return calories;
+    public int getAmount() {
+        return amount;
     }
 
-    public void setCalories(int calories) {
-        this.calories = calories;
+    public void setAmount(int amount) {
+        this.amount = amount;
     }
 
-    public List<IngredientQuantityEntity> getIngredientQuantities() {
-        return ingredientQuantities;
+    public Unit getUnit() {
+        return unit;
     }
 
-    public void setIngredientQuantities(List<IngredientQuantityEntity> ingredientQuantities) {
-        this.ingredientQuantities = ingredientQuantities;
+    public void setUnit(Unit unit) {
+        this.unit = unit;
     }
 
+    public RecipeEntity getRecipe() {
+        return recipe;
+    }
+
+    public void setRecipe(RecipeEntity recipe) {
+        this.recipe = recipe;
+    }
 }

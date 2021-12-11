@@ -3,18 +3,18 @@ package htw.berlin.webtech.Kochbuch.web.api;
 import java.util.List;
 
 public class Recipe {
-    List<IngredientQuantity> ingredientQuantities;
     private long id;
     private String recipeName;
     private String description;
     private int duration;
+    private List<Ingredient> ingredients;
 
-    public Recipe(long id, String recipeName, String description, int duration, List<IngredientQuantity> ingredientQuantities) {
+    public Recipe(long id, String recipeName, String description, int duration, List<Ingredient> ingredients) {
         this.id = id;
         this.recipeName = recipeName;
         this.description = description;
         this.duration = duration;
-        this.ingredientQuantities = ingredientQuantities;
+        this.ingredients = ingredients;
     }
 
     public long getId() {
@@ -49,11 +49,11 @@ public class Recipe {
         this.duration = duration;
     }
 
-    public List<IngredientQuantity> getIngredientQuantities() {
-        return ingredientQuantities;
+    public List<Ingredient> getIngredients() {
+        return ingredients;
     }
 
-    public void setIngredientQuantities(List<IngredientQuantity> ingredientQuantities) {
-        this.ingredientQuantities = ingredientQuantities;
+    public void setIngredients(List<Ingredient> ingredients) {
+        this.ingredients = ingredients;
     }
 }
