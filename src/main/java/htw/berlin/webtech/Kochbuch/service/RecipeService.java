@@ -35,15 +35,13 @@ public class RecipeService {
     }
 
     public Recipe create(RecipeManipulationRequest request) {
-        var ingredients = ingredientRepository.findAllById(request.getIngredientIds());
-        var recipeEntity = new RecipeEntity(request.getRecipeName(), request.getDescription(), request.getDuration(), ingredients);
+        var recipeEntity = new RecipeEntity(request.getRecipeName(), request.getDescription(), request.getDuration());
         recipeEntity = recipeRepository.save(recipeEntity);
         return recipeTransformer.transformEntity(recipeEntity);
     }
 
     public Recipe update(Long id, RecipeManipulationRequest request) {
         var RecipeEntityOptional = recipeRepository.findById(id);
-        var ingredients = ingredientRepository.findAllById(request.getIngredientIds());
         if (RecipeEntityOptional.isEmpty()) {
             return null;
         }
@@ -51,7 +49,6 @@ public class RecipeService {
         recipeEntity.setRecipeName(request.getRecipeName());
         recipeEntity.setDescription(request.getDescription());
         recipeEntity.setDuration(request.getDuration());
-        recipeEntity.setIngredients(ingredients);
         recipeEntity = recipeRepository.save(recipeEntity);
         return recipeTransformer.transformEntity(recipeEntity);
     }

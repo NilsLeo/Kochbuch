@@ -12,20 +12,19 @@ public class RecipeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private long id;
-    @Column(nullable = false)
+    @Column
     private String recipeName;
-    @Column(nullable = false, length = 10000)
+    @Column(length = 10000)
     private String description;
-    @Column(nullable = false)
+    @Column
     private int duration;
     @OneToMany(mappedBy = "recipe", fetch = FetchType.EAGER)
     private List<IngredientEntity> ingredients = new ArrayList<>();
 
-    public RecipeEntity(String recipeName, String description, int duration, List<IngredientEntity> ingredients) {
+    public RecipeEntity(String recipeName, String description, int duration) {
         this.recipeName = recipeName;
         this.description = description;
         this.duration = duration;
-        this.ingredients = ingredients;
     }
 
     protected RecipeEntity() {

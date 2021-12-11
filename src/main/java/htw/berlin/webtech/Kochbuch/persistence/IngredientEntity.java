@@ -5,14 +5,11 @@ import javax.persistence.*;
 @Entity(name = "ingredient")
 public class IngredientEntity {
 
-
-    //@OneToMany(mappedBy = "ingredient",fetch = FetchType.EAGER)
-    //List<IngredientQuantityEntity> ingredientQuantities =new ArrayList<>();
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
     private long id;
-    @Column(nullable = false)
+    @Column
     private String ingredientName;
     @Column
     private int amount;

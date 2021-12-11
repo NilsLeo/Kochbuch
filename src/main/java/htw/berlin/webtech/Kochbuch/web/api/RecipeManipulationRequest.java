@@ -6,13 +6,11 @@ public class RecipeManipulationRequest {
     private String recipeName;
     private String description;
     private int duration;
-    private List<Long> ingredientIds;
 
-    public RecipeManipulationRequest(String recipeName, String description, int duration, List<Long> ingredientIds) {
+    public RecipeManipulationRequest(String recipeName, String description, int duration) {
         this.recipeName = recipeName;
         this.description = description;
         this.duration = duration;
-        this.ingredientIds = ingredientIds;
     }
 
     public String getRecipeName() {
@@ -39,12 +37,5 @@ public class RecipeManipulationRequest {
         this.duration = duration;
     }
 
-    public List<Long> getIngredientIds() {
-        return ingredientIds;
-    }
-
-    public void setIngredientIds(List<Long> ingredientIds) {
-        this.ingredientIds = ingredientIds;
-    }
 }
 
