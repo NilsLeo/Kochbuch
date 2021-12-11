@@ -3,6 +3,7 @@ package htw.berlin.webtech.Kochbuch.persistence;
 import htw.berlin.webtech.Kochbuch.web.api.IngredientQuantity;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -12,7 +13,7 @@ public class IngredientEntity {
 
 
     @OneToMany(mappedBy = "ingredient",fetch = FetchType.EAGER)
-    List<IngredientQuantityEntity> ingredientQuantities;
+    List<IngredientQuantityEntity> ingredientQuantities =new ArrayList<>();
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column

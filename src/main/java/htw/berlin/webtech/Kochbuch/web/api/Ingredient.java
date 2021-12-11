@@ -4,16 +4,16 @@ import java.util.List;
 
 
 public class Ingredient {
-    List<IngredientQuantity> ingredientquantities;
+    List<IngredientQuantity> ingredientQuantities;
     private long ingredient_id;
     private String ingredientName;
     private int calories;
 
-    public Ingredient(long ingredient_id, String ingredientName, int calories, List<IngredientQuantity> ingredientquantities) {
+    public Ingredient(long ingredient_id, String ingredientName, int calories, List<IngredientQuantity> ingredientQuantities) {
         this.ingredient_id = ingredient_id;
         this.ingredientName = ingredientName;
         this.calories = calories;
-        this.ingredientquantities = ingredientquantities;
+        this.ingredientQuantities = ingredientQuantities;
     }
 
     public long getIngredient_id() {
@@ -40,11 +40,11 @@ public class Ingredient {
         this.calories = calories;
     }
 
-    public List<IngredientQuantity> getIngredientquantities() {
-        return ingredientquantities;
+    public List<IngredientQuantity> getIngredientQuantities() {
+        return ingredientQuantities;
     }
 
-    public void setIngredientquantities(List<IngredientQuantity> ingredientquantities) {
-        this.ingredientquantities = ingredientquantities;
+    public void setIngredientQuantities(List<IngredientQuantity> ingredientQuantities) {
+        this.ingredientQuantities = ingredientQuantities;
     }
 }

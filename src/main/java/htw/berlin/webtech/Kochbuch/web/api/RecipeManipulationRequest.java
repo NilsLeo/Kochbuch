@@ -10,8 +10,11 @@ public class RecipeManipulationRequest {
     private String description;
     private int duration;
 
-    public RecipeManipulationRequest(String recipeName) {
+    public RecipeManipulationRequest(List<IngredientQuantityEntity> ingredientQuantities, String recipeName, String description, int duration) {
+        this.ingredientQuantities = ingredientQuantities;
         this.recipeName = recipeName;
+        this.description = description;
+        this.duration = duration;
     }
 
     public String getRecipeName() {

@@ -32,6 +32,7 @@ public class RecipeService {
     }
 
     public Recipe create(RecipeManipulationRequest request) {
+
         var RecipeEntity = new RecipeEntity(request.getRecipeName(), request.getDescription(), request.getDuration(), request.getIngredientQuantities());
         RecipeEntity = recipeRepository.save(RecipeEntity);
         return transformEntity(RecipeEntity);

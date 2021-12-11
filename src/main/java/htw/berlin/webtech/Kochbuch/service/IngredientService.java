@@ -27,12 +27,15 @@ public class IngredientService {
     }
 
     public Ingredient findById(Long id) {
-        var IngredientEntity = ingredientRepository.findById(id);
-        return IngredientEntity.map(this::transformIngredientEntity).orElse(null);
+        var ingredientEntity = ingredientRepository.findById(id);
+        return ingredientEntity.map(this::transformIngredientEntity).orElse(null);
     }
-
+    public Ingredient findByIngredientName(String ingredientName){
+        var ingredientEntity=ingredientRepository.findByIngredientName(ingredientName);
+        return transformIngredientEntity(ingredientEntity);
+    }
     public Ingredient create(IngredientManipulationRequest request) {
-        var IngredientEntity = new IngredientEntity(request.getIngredientName(), request.getCalories(), request.getIngredientquantities());
+        var IngredientEntity = new IngredientEntity(request.getIngredientName(), request.getCalories(), request.getIngredientQuantities());
         IngredientEntity = ingredientRepository.save(IngredientEntity);
         return transformIngredientEntity(IngredientEntity);
     }
@@ -49,7 +52,7 @@ public class IngredientService {
         return transformIngredientEntity(IngredientEntity);
     }
 
-    public IngredientQuantity transformIngredientQuantityEntity(IngredientQuantityEntity IngredientQuantityEntity) {
+    private IngredientQuantity transformIngredientQuantityEntity(IngredientQuantityEntity IngredientQuantityEntity) {
         return new IngredientQuantity(
                 IngredientQuantityEntity.getRecipe().getId(),
                 IngredientQuantityEntity.getIngredient().getId(),
