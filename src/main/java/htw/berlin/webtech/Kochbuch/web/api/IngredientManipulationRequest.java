@@ -13,6 +13,9 @@ public class IngredientManipulationRequest {
         this.recipeId = recipeId;
     }
 
+    public IngredientManipulationRequest(){
+
+    }
     public Long getRecipeId() {
         return recipeId;
     }

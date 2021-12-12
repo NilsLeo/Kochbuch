@@ -12,6 +12,9 @@ public class RecipeManipulationRequest {
         this.description = description;
         this.duration = duration;
     }
+    public RecipeManipulationRequest(){
+
+    }
 
     public String getRecipeName() {
         return recipeName;
