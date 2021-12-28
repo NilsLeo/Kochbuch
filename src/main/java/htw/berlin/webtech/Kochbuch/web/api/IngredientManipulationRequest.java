@@ -16,6 +16,7 @@ public class IngredientManipulationRequest {
     public IngredientManipulationRequest(){
 
     }
+
     public Long getRecipeId() {
         return recipeId;
     }

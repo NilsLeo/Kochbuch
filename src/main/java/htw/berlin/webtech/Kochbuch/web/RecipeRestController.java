@@ -13,9 +13,11 @@ import java.util.List;
 @RestController
 public class RecipeRestController {
     private final RecipeService recipeService;
+    private final IngredientRestController ingredientRestController;
 
-    public RecipeRestController(RecipeService recipeService) {
+    public RecipeRestController(RecipeService recipeService, IngredientRestController ingredientRestController) {
         this.recipeService = recipeService;
+        this.ingredientRestController = ingredientRestController;
     }
 
     @GetMapping(path = "/api/v1/Recipes")
@@ -45,6 +47,9 @@ public class RecipeRestController {
 
     @DeleteMapping(path = "/api/v1/Recipes/{id}")
     public ResponseEntity<Void> deleteRecipe(@PathVariable Long id) {
+        recipeService.findById(id).getIngredients().forEach(ingredient -> {
+            ingredientRestController.deleteIngredient(ingredient.getId());
+        });
         boolean successful = recipeService.deleteById(id);
         return successful ? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
     }

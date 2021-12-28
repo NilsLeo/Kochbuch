@@ -1,26 +1,26 @@
 package htw.berlin.webtech.Kochbuch.web.api;
 
 public class Ingredient {
-    private long ingredient_id;
+    private long id;
     private String ingredientName;
     private int amount;
     private String unit;
     private Long recipeId;
 
-    public Ingredient(long ingredient_id, String ingredientName, int amount, String unit, Long recipeId) {
-        this.ingredient_id = ingredient_id;
+    public Ingredient(long id, String ingredientName, int amount, String unit, Long recipeId) {
+        this.id = id;
         this.ingredientName = ingredientName;
         this.amount = amount;
         this.unit = unit;
         this.recipeId = recipeId;
     }
 
-    public long getIngredient_id() {
-        return ingredient_id;
+    public long getId() {
+        return id;
     }
 
-    public void setIngredient_id(long ingredient_id) {
-        this.ingredient_id = ingredient_id;
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getIngredientName() {

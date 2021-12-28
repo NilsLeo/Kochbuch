@@ -33,7 +33,6 @@ public class RecipeService {
         var RecipeEntity = recipeRepository.findById(id);
         return RecipeEntity.map(recipeTransformer::transformEntity).orElse(null);
     }
-
     public Recipe create(RecipeManipulationRequest request) {
         var recipeEntity = new RecipeEntity(request.getRecipeName(), request.getDescription(), request.getDuration());
         recipeEntity = recipeRepository.save(recipeEntity);

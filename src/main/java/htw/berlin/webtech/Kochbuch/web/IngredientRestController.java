@@ -1,8 +1,11 @@
 package htw.berlin.webtech.Kochbuch.web;
 
+import htw.berlin.webtech.Kochbuch.persistence.RecipeEntity;
 import htw.berlin.webtech.Kochbuch.service.IngredientService;
+import htw.berlin.webtech.Kochbuch.service.RecipeService;
 import htw.berlin.webtech.Kochbuch.web.api.Ingredient;
 import htw.berlin.webtech.Kochbuch.web.api.IngredientManipulationRequest;
+import htw.berlin.webtech.Kochbuch.web.api.Recipe;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,9 +15,11 @@ import java.util.List;
 
 @RestController
 public class IngredientRestController {
+    private final RecipeService recipeService;
     private final IngredientService ingredientService;
 
-    public IngredientRestController(IngredientService ingredientService) {
+    public IngredientRestController(RecipeService recipeService, IngredientService ingredientService) {
+        this.recipeService = recipeService;
         this.ingredientService = ingredientService;
     }
 
@@ -23,7 +28,6 @@ public class IngredientRestController {
         return ResponseEntity.ok(ingredientService.findAll());
     }
 
-    //wichtig das die long variable wie /{id} heißt da Spring das so automatisch erkennt
     @GetMapping(path = "/api/v1/Ingredients/{id}")
     public ResponseEntity<Ingredient> fetchIngredientById(@PathVariable Long id) {
         var ingredient = ingredientService.findById(id);
@@ -32,8 +36,10 @@ public class IngredientRestController {
 
     @PostMapping(path = "/api/v1/Ingredients")
     public ResponseEntity<Void> createIngredient(@RequestBody IngredientManipulationRequest request) throws URISyntaxException {
+        List<Recipe> recipes= recipeService.findAll();
+        request.setRecipeId(recipes.get(0).getId()+recipes.size());
         var ingredient = ingredientService.create(request);
-        URI uri = new URI("/api/v1/Ingredients/" + ingredient.getIngredient_id());
+        URI uri = new URI("/api/v1/Ingredients/" + ingredient.getId());
         return ResponseEntity.created(uri).build();
     }
 
