@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 @RestController
 public class IngredientRestController {
@@ -35,9 +36,10 @@ public class IngredientRestController {
     }
 
     @PostMapping(path = "/api/v1/Ingredients")
-    public ResponseEntity<Void> createIngredient(@RequestBody IngredientManipulationRequest request) throws URISyntaxException {
+    public ResponseEntity<Void> createIngredient(@RequestBody IngredientManipulationRequest request) throws URISyntaxException{
         List<Recipe> recipes= recipeService.findAll();
-        request.setRecipeId(recipes.get(0).getId()+recipes.size());
+        request.setRecipeId(recipes.get(recipes.size()-1).getId());
+        System.out.println("Recipeid Request: " + request.getRecipeId());
         var ingredient = ingredientService.create(request);
         URI uri = new URI("/api/v1/Ingredients/" + ingredient.getId());
         return ResponseEntity.created(uri).build();
@@ -55,3 +57,4 @@ public class IngredientRestController {
         return successful ? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
     }
 }
+
