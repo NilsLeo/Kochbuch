@@ -4,11 +4,11 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 public class RecipeManipulationRequest {
-    @NotBlank (message="Name must not be empty")
+    @NotBlank(message = "Name must not be empty")
     private String recipeName;
-    @NotBlank (message="Description must not be empty")
+    @NotBlank(message = "Description must not be empty")
     private String description;
-    @NotNull(message="Duration must not be empty")
+    @NotNull(message = "Duration must not be empty")
     private int duration;
 
     public RecipeManipulationRequest(String recipeName, String description, int duration) {
@@ -16,7 +16,8 @@ public class RecipeManipulationRequest {
         this.description = description;
         this.duration = duration;
     }
-    public RecipeManipulationRequest(){
+
+    public RecipeManipulationRequest() {
 
     }
 

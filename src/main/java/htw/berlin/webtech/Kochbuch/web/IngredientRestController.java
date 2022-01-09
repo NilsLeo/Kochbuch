@@ -1,18 +1,14 @@
 package htw.berlin.webtech.Kochbuch.web;
 
-import htw.berlin.webtech.Kochbuch.persistence.RecipeEntity;
 import htw.berlin.webtech.Kochbuch.service.IngredientService;
-import htw.berlin.webtech.Kochbuch.service.RecipeService;
 import htw.berlin.webtech.Kochbuch.web.api.Ingredient;
 import htw.berlin.webtech.Kochbuch.web.api.IngredientManipulationRequest;
-import htw.berlin.webtech.Kochbuch.web.api.Recipe;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 @RestController
 public class IngredientRestController {
@@ -34,7 +30,7 @@ public class IngredientRestController {
     }
 
     @PostMapping(path = "/api/v1/Ingredients")
-    public ResponseEntity<Void> createIngredient(@RequestBody IngredientManipulationRequest request) throws URISyntaxException{
+    public ResponseEntity<Void> createIngredient(@RequestBody IngredientManipulationRequest request) throws URISyntaxException {
         var ingredient = ingredientService.create(request);
         URI uri = new URI("/api/v1/Ingredients/" + ingredient.getId());
         return ResponseEntity.created(uri).build();

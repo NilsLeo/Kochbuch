@@ -1,6 +1,5 @@
 package htw.berlin.webtech.Kochbuch.service;
 
-import htw.berlin.webtech.Kochbuch.persistence.IngredientRepository;
 import htw.berlin.webtech.Kochbuch.persistence.RecipeEntity;
 import htw.berlin.webtech.Kochbuch.persistence.RecipeRepository;
 import htw.berlin.webtech.Kochbuch.web.api.Recipe;
@@ -14,12 +13,10 @@ import java.util.stream.Collectors;
 public class RecipeService {
     private final RecipeRepository recipeRepository;
     private final RecipeTransformer recipeTransformer;
-    private final IngredientRepository ingredientRepository;
 
-    public RecipeService(RecipeRepository recipeRepository, RecipeTransformer recipeTransformer, IngredientRepository ingredientRepository) {
+    public RecipeService(RecipeRepository recipeRepository, RecipeTransformer recipeTransformer) {
         this.recipeRepository = recipeRepository;
         this.recipeTransformer = recipeTransformer;
-        this.ingredientRepository = ingredientRepository;
     }
 
     public List<Recipe> findAll() {
@@ -33,6 +30,7 @@ public class RecipeService {
         var RecipeEntity = recipeRepository.findById(id);
         return RecipeEntity.map(recipeTransformer::transformEntity).orElse(null);
     }
+
     public Recipe create(RecipeManipulationRequest request) {
         var recipeEntity = new RecipeEntity(request.getRecipeName(), request.getDescription(), request.getDuration());
         recipeEntity = recipeRepository.save(recipeEntity);

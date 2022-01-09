@@ -35,10 +35,6 @@ public class IngredientEntity {
         return id;
     }
 
-    public void setId(long id) {
-        this.id = id;
-    }
-
     public String getIngredientName() {
         return ingredientName;
     }

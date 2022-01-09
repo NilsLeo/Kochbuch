@@ -15,13 +15,11 @@ import java.util.stream.Collectors;
 public class IngredientService {
     private final IngredientRepository ingredientRepository;
     private final RecipeRepository recipeRepository;
-    private final RecipeTransformer recipeTransformer;
     private final IngredientTransformer ingredientTransformer;
 
-    public IngredientService(IngredientRepository ingredientRepository, RecipeRepository recipeRepository, RecipeTransformer recipeTransformer, IngredientTransformer ingredientTransformer) {
+    public IngredientService(IngredientRepository ingredientRepository, RecipeRepository recipeRepository, IngredientTransformer ingredientTransformer) {
         this.ingredientRepository = ingredientRepository;
         this.recipeRepository = recipeRepository;
-        this.recipeTransformer = recipeTransformer;
         this.ingredientTransformer = ingredientTransformer;
     }
 
