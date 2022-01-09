@@ -6,6 +6,7 @@ import htw.berlin.webtech.Kochbuch.web.api.RecipeManipulationRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -33,7 +34,7 @@ public class RecipeRestController {
     }
 
     @PostMapping(path = "/api/v1/Recipes")
-    public ResponseEntity<Void> createRecipe(@RequestBody RecipeManipulationRequest request) throws URISyntaxException {
+    public ResponseEntity<Void> createRecipe(@Valid @RequestBody RecipeManipulationRequest request) throws URISyntaxException {
         var recipe = recipeService.create(request);
         URI uri = new URI("/api/v1/Recipes/" + recipe.getId());
         return ResponseEntity.created(uri).build();

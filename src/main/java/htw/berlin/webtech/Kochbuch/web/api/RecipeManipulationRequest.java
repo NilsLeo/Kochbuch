@@ -1,10 +1,14 @@
 package htw.berlin.webtech.Kochbuch.web.api;
 
-import java.util.List;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 public class RecipeManipulationRequest {
+    @NotBlank (message="Name must not be empty")
     private String recipeName;
+    @NotBlank (message="Description must not be empty")
     private String description;
+    @NotNull(message="Duration must not be empty")
     private int duration;
 
     public RecipeManipulationRequest(String recipeName, String description, int duration) {

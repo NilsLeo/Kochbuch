@@ -16,11 +16,9 @@ import java.util.concurrent.TimeUnit;
 
 @RestController
 public class IngredientRestController {
-    private final RecipeService recipeService;
     private final IngredientService ingredientService;
 
-    public IngredientRestController(RecipeService recipeService, IngredientService ingredientService) {
-        this.recipeService = recipeService;
+    public IngredientRestController(IngredientService ingredientService) {
         this.ingredientService = ingredientService;
     }
 
@@ -37,9 +35,6 @@ public class IngredientRestController {
 
     @PostMapping(path = "/api/v1/Ingredients")
     public ResponseEntity<Void> createIngredient(@RequestBody IngredientManipulationRequest request) throws URISyntaxException{
-        List<Recipe> recipes= recipeService.findAll();
-        request.setRecipeId(recipes.get(recipes.size()-1).getId());
-        System.out.println("Recipeid Request: " + request.getRecipeId());
         var ingredient = ingredientService.create(request);
         URI uri = new URI("/api/v1/Ingredients/" + ingredient.getId());
         return ResponseEntity.created(uri).build();

@@ -39,7 +39,6 @@ public class IngredientService {
 
     public Ingredient create(IngredientManipulationRequest request) {
         var unit = Unit.valueOf(request.getUnit());
-        System.out.println(unit);
         var recipe = recipeRepository.findById(request.getRecipeId()).orElseThrow();
         var ingredientEntity = new IngredientEntity(request.getIngredientName(), request.getAmount(), unit, recipe);
         ingredientEntity = ingredientRepository.save(ingredientEntity);

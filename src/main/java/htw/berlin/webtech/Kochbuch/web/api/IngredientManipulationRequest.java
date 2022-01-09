@@ -1,5 +1,9 @@
 package htw.berlin.webtech.Kochbuch.web.api;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+
 public class IngredientManipulationRequest {
     private String ingredientName;
     private int amount;
