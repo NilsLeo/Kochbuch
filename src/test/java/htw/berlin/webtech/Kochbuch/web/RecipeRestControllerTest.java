@@ -2,7 +2,6 @@ package htw.berlin.webtech.Kochbuch.web;
 
 import htw.berlin.webtech.Kochbuch.service.RecipeService;
 import htw.berlin.webtech.Kochbuch.web.api.Recipe;
-import org.hamcrest.Matchers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -21,8 +20,8 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(RecipeRestController.class)
@@ -95,18 +94,5 @@ class RecipeRestControllerTest {
                 .andExpect(status().isNotFound());
     }
 
-    @Test
-    @DisplayName("should return 201 http status and Location header when creating a recipe")
-    void should_return_201_http_status_and_location_header_when_creating_a_recipe() throws Exception {
-        String recipeToCreateAsJson = "{\"recipeName\": \"recipeName\", \"description\":\"description\"}";
-        var recipe = new Recipe(0L, null, null, 1, null);
-        mockMvc.perform(
-                        post("/api/v1/Recipes/")
-                                .contentType(MediaType.APPLICATION_JSON)
-                                .content(recipeToCreateAsJson))
-                .andExpect(status().isCreated())
-                .andExpect(header().exists("Location"))
-                .andExpect(header().string("Location", Matchers.equalTo(("/api/v1/Recipes/" + recipe.getId()))));
-    }
 
 }
